@@ -1,0 +1,360 @@
+/* AURA INTRO // derived from the final access terminal visual system */
+
+@font-face {
+  font-family: "AuraDisplay";
+  src: local("Conthrax Sb"), local("Conthrax SB"), local("Conthrax");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "AuraMono";
+  src: local("Menlo Regular"), local("Menlo"), local("Courier New");
+  font-display: swap;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #050507;
+}
+
+body {
+  color: #f7f4ff;
+  font-family: "AuraDisplay", Arial, Helvetica, sans-serif;
+}
+
+.screen {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  min-height: 100vh;
+  overflow: hidden;
+  cursor: default;
+  background:
+    radial-gradient(circle at 50% 47%, rgba(111, 52, 213, 0.19) 0%, rgba(57, 25, 104, 0.08) 30%, rgba(5,5,7,0) 60%),
+    linear-gradient(180deg, #08080d 0%, #050507 100%);
+}
+
+.screen::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(70vw, 1150px);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(126, 70, 229, 0.09), rgba(74, 34, 130, 0.025) 47%, transparent 71%);
+  pointer-events: none;
+}
+
+.grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.13;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(143,91,255,.11) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(143,91,255,.11) 1px, transparent 1px);
+  background-size: 72px 72px;
+  -webkit-mask-image: radial-gradient(circle at center, black 0%, transparent 78%);
+  mask-image: radial-gradient(circle at center, black 0%, transparent 78%);
+}
+
+.noise {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  opacity: .018;
+  background: repeating-linear-gradient(0deg, rgba(255,255,255,.85) 0, rgba(255,255,255,.85) 1px, transparent 1px, transparent 4px);
+  mix-blend-mode: overlay;
+}
+
+.scanline {
+  position: absolute;
+  left: 0;
+  top: -5%;
+  z-index: 30;
+  width: 100%;
+  height: 2px;
+  opacity: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, #7540d0, #eee6ff, #7540d0, transparent);
+  box-shadow: 0 0 14px rgba(145,80,255,.42);
+  animation: scan 5.8s linear infinite;
+}
+
+@keyframes scan {
+  0% { top: -5%; opacity: 0; }
+  10% { opacity: .28; }
+  90% { opacity: .28; }
+  100% { top: 105%; opacity: 0; }
+}
+
+.corner {
+  position: absolute;
+  z-index: 20;
+  width: 92px;
+  height: 92px;
+  opacity: .78;
+  pointer-events: none;
+}
+.corner-tl { left: 32px; top: 32px; border-left: 2px solid #7942dc; border-top: 2px solid #7942dc; }
+.corner-tr { right: 32px; top: 32px; border-right: 2px solid #7942dc; border-top: 2px solid #7942dc; }
+.corner-bl { left: 32px; bottom: 32px; border-left: 2px solid #7942dc; border-bottom: 2px solid #7942dc; }
+.corner-br { right: 32px; bottom: 32px; border-right: 2px solid #7942dc; border-bottom: 2px solid #7942dc; }
+
+.system-info {
+  position: absolute;
+  top: 67px;
+  z-index: 21;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #6e6778;
+  font-family: "AuraMono", "Courier New", monospace;
+  font-size: clamp(9px, .68vw, 12px);
+  letter-spacing: .18em;
+  line-height: 1.18;
+}
+.system-info span:first-child { color: #b182ff; }
+.system-info-left { left: 73px; }
+.system-info-right { right: 73px; text-align: right; }
+
+.boot-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 105px 80px 95px;
+}
+
+.stage-item {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity .42s ease, transform .42s ease;
+}
+.stage-item.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 44px;
+}
+
+.aura-logo {
+  display: block;
+  width: min(520px, 36vw);
+  max-height: 145px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 20px rgba(132,70,238,.18));
+}
+
+.forum-title {
+  margin-top: 17px;
+  color: #bdb4c7;
+  font-family: "AuraDisplay", Arial, sans-serif;
+  font-size: clamp(13px, 1vw, 19px);
+  letter-spacing: .25em;
+  white-space: nowrap;
+}
+
+.boot-block {
+  width: min(840px, 62vw);
+  text-align: center;
+}
+
+.micro-title {
+  margin-bottom: 13px;
+  color: #a67af2;
+  font-family: "AuraMono", "Courier New", monospace;
+  font-size: clamp(10px, .76vw, 14px);
+  letter-spacing: .21em;
+}
+
+.boot-title {
+  margin-bottom: 27px;
+  color: #f7f4ff;
+  font-family: "AuraDisplay", Arial, sans-serif;
+  font-size: clamp(25px, 2.2vw, 42px);
+  letter-spacing: .07em;
+}
+
+.loading-shell {
+  width: 100%;
+  height: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(126,77,187,.78);
+  background: rgba(20,12,31,.62);
+}
+
+.loading-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #5c2caf 0%, #9860f1 54%, #eee4ff 100%);
+  box-shadow: 0 0 18px rgba(155,94,255,.52);
+}
+
+.loading-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 11px;
+  color: #766d80;
+  font-family: "AuraMono", "Courier New", monospace;
+  font-size: clamp(9px, .7vw, 12px);
+  letter-spacing: .17em;
+}
+
+.result-block {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(920px, 68vw);
+  transform: translate(-50%, -30%);
+  pointer-events: none;
+}
+
+.result-line,
+.objective {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+.result-line.show,
+.objective.show {
+  animation: reveal .42s ease forwards;
+}
+
+@keyframes reveal {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.result-line {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 30px;
+  padding: 18px 4px 17px;
+  border-bottom: 1px solid rgba(125,84,177,.25);
+}
+
+.result-key {
+  color: #f5f1fb;
+  font-family: "AuraDisplay", Arial, sans-serif;
+  font-size: clamp(22px, 2vw, 38px);
+  letter-spacing: .045em;
+}
+
+.result-value {
+  color: #a774ff;
+  font-family: "AuraMono", "Courier New", monospace;
+  font-size: clamp(13px, 1.15vw, 21px);
+  letter-spacing: .18em;
+}
+
+.locked .result-value { color: #c994ff; }
+
+.objective {
+  margin-top: 46px;
+  text-align: center;
+}
+
+.objective-label {
+  margin-bottom: 16px;
+  color: #8d8399;
+  font-family: "AuraMono", "Courier New", monospace;
+  font-size: clamp(12px, .92vw, 17px);
+  letter-spacing: .24em;
+}
+
+.objective-main {
+  color: #a76dff;
+  font-family: "AuraDisplay", Arial, sans-serif;
+  font-size: clamp(42px, 4vw, 76px);
+  letter-spacing: .055em;
+  text-shadow: 0 0 30px rgba(143,75,255,.25);
+}
+
+.objective-rule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 30px;
+}
+.objective-rule span {
+  display: block;
+  width: 190px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #7440d3);
+}
+.objective-rule span:last-child { transform: scaleX(-1); }
+.objective-rule i {
+  width: 8px;
+  height: 8px;
+  background: #c59fff;
+  transform: rotate(45deg);
+  box-shadow: 0 0 13px rgba(151,84,255,.68);
+}
+
+.footer-code {
+  position: absolute;
+  left: 50%;
+  bottom: 47px;
+  z-index: 21;
+  display: flex;
+  gap: 34px;
+  transform: translateX(-50%);
+  color: #625b6b;
+  font-family: "AuraMono", "Courier New", monospace;
+  font-size: clamp(8px, .58vw, 10px);
+  letter-spacing: .18em;
+  white-space: nowrap;
+}
+.cursor { color: #9f69f4; animation: blink .78s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+
+/* During result phase, the boot block fades out and the logo moves up slightly. */
+.screen.results .boot-block {
+  opacity: 0 !important;
+  transform: translateY(-12px) !important;
+  transition: opacity .32s ease, transform .32s ease;
+}
+.screen.results .brand {
+  transform: translateY(-155px) scale(.72);
+  transition: transform .55s cubic-bezier(.22,.68,.28,1);
+}
+
+@media (max-height: 760px) {
+  .boot-wrap { padding-top: 82px; padding-bottom: 65px; }
+  .brand { margin-bottom: 28px; }
+  .aura-logo { width: min(440px, 32vw); max-height: 122px; }
+  .forum-title { margin-top: 12px; }
+  .boot-title { margin-bottom: 19px; }
+  .result-block { transform: translate(-50%, -27%); }
+  .screen.results .brand { transform: translateY(-125px) scale(.68); }
+}
+
+@media (max-width: 850px) {
+  .system-info { display: none; }
+  .corner { width: 55px; height: 55px; }
+  .boot-wrap { padding-left: 24px; padding-right: 24px; }
+  .aura-logo { width: 70vw; }
+  .forum-title { white-space: normal; text-align: center; }
+  .boot-block, .result-block { width: 88vw; }
+  .result-line { align-items: flex-start; flex-direction: column; gap: 7px; }
+  .objective-rule span { width: 90px; }
+  .footer-code { display: none; }
+}
