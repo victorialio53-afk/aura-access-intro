@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AURA // Инициализация</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="screen" class="screen">
+    <div class="grid"></div>
+    <div class="scanline"></div>
+    <div class="noise"></div>
+
+    <div class="corner corner-tl"></div>
+    <div class="corner corner-tr"></div>
+    <div class="corner corner-bl"></div>
+    <div class="corner corner-br"></div>
+
+    <div class="system-info system-info-left">
+      <span>AURA.SYSTEM</span>
+      <span>УЗЕЛ // ACCESS_01</span>
+      <span>МОДУЛЬ АВТОРИЗАЦИИ</span>
+      <span>СОСТОЯНИЕ // ONLINE</span>
+    </div>
+
+    <div class="system-info system-info-right">
+      <span>AURA FORUM 2026</span>
+      <span>BUILD // 1.0.0</span>
+      <span>ПРОТОКОЛ // ACCESS</span>
+      <span>СЕАНС // 01</span>
+    </div>
+
+    <section class="boot-wrap">
+      <div id="brand" class="brand stage-item">
+        <img class="aura-logo" src="assets/aura-logo.svg" alt="AURA">
+        <div class="forum-title">ФОРУМ ДЛЯ ПЕРВОКУРСНИКОВ 2026</div>
+      </div>
+
+      <div id="bootBlock" class="boot-block stage-item">
+        <div class="micro-title">AURA.SYSTEM // ПРОТОКОЛ ДОСТУПА</div>
+        <div class="boot-title">ИНИЦИАЛИЗАЦИЯ СИСТЕМЫ</div>
+
+        <div class="loading-shell">
+          <div id="loadingFill" class="loading-fill"></div>
+        </div>
+
+        <div class="loading-meta">
+          <span>ПОДКЛЮЧЕНИЕ К УЗЛУ</span>
+          <span id="percent">000%</span>
+        </div>
+      </div>
+
+      <div id="resultBlock" class="result-block">
+        <div id="detected" class="result-line detected">
+          <span class="result-key">ПОЛЬЗОВАТЕЛЬ_01</span>
+          <span class="result-value">ОБНАРУЖЕН</span>
+        </div>
+
+        <div id="locked" class="result-line locked">
+          <span class="result-key">СТАТУС ДОСТУПА</span>
+          <span class="result-value">ЗАБЛОКИРОВАН</span>
+        </div>
+
+        <div id="objective" class="objective">
+          <div class="objective-label">ТЕКУЩАЯ ЗАДАЧА</div>
+          <div class="objective-main">ВОССТАНОВИТЬ ДОСТУП</div>
+          <div class="objective-rule">
+            <span></span><i></i><span></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer-code">
+      <span>SESSION // 01</span>
+      <span>AUTHORIZATION REQUIRED</span>
+      <span class="cursor">_</span>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
